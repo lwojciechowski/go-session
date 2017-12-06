@@ -88,12 +88,6 @@ func (p *Provider) SessionGC(maxlifetime int64) {
 			break
 		}
 	}
-	for e := provider.list.Front(); e != nil; e = e.Next() {
-		if (e.Value.(*SessionStore).timeAccessed.Unix() + maxlifetime) < time.Now().Unix() {
-			provider.list.Remove(e)
-			delete(provider.sessions, e.Value.(*SessionStore).sid)
-		}
-	}
 }
 
 func (p *Provider) SessionUpdate(sid string) error {

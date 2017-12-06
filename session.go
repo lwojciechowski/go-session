@@ -85,7 +85,13 @@ func (m *Manager) SessionDestroy(w http.ResponseWriter, r *http.Request) {
 	defer m.lock.Unlock()
 	m.provider.SessionDestroy(cookie.Value)
 	expiration := time.Now()
-	delCookie := http.Cookie{Name: m.cookieName, Path: "/", HttpOnly: true, Expires: expiration, MaxAge: -1}
+	delCookie := http.Cookie{
+		Name:     m.cookieName,
+		Path:     "/",
+		HttpOnly: true,
+		Expires:  expiration,
+		MaxAge:   -1,
+	}
 	http.SetCookie(w, &delCookie)
 }
 
