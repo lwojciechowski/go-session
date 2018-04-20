@@ -57,7 +57,7 @@ func (p *Provider) SessionInit(sid string) (session.Session, error) {
 }
 
 func (p *Provider) SessionRead(sid string) (session.Session, error) {
-	if element, ok := provider.sessions[sid]; !ok {
+	if element, ok := provider.sessions[sid]; ok {
 		return element.Value.(*SessionStore), nil
 	}
 	return provider.SessionInit(sid)
